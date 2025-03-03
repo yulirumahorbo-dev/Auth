@@ -3,11 +3,11 @@ import { createContext, useState } from "react";
 export const AuthContext = createContext({
   token: "",
   isAuthenticated: false,
-  authenticate: () => {},
+  authenticate: (token) => {},
   logout: () => {},
 });
 
-function AuthContentProvider({ children }) {
+function AuthContextProvider({ children }) {
   const [authToken, setAuthToken] = useState();
 
   function authenticate(token) {
@@ -24,7 +24,8 @@ function AuthContentProvider({ children }) {
     authenticate: authenticate,
     logout: logout,
   };
-  return <AuthContext.Provider>{children}</AuthContext.Provider>;
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
-export default AuthContentProvider;
+export default AuthContextProvider;
